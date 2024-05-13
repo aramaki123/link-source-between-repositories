@@ -1,0 +1,19 @@
+name: dispatch target file updated
+on:
+  push:
+    paths:
+      - '.gitignore'
+jobs:
+  dispatch-target-updated:
+    strategy:
+      matrix:
+        repo: ['organization/connection-destination-between-repositories']
+    name: dispatch-target-updated
+    runs-on: ubuntu-latest
+    steps:
+      - name: dispatch-target-updated
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+          repository: ${{ matrix.repo }}
+          event-type: target-updated
